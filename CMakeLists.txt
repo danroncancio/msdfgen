@@ -130,7 +130,8 @@ endif()
 # Extensions library
 if(NOT MSDFGEN_CORE_ONLY)
     if(NOT TARGET Freetype::Freetype)
-        find_package(Freetype REQUIRED)
+		#find_package(Freetype REQUIRED)
+		add_subdirectory(freetype)
     endif()
     if(NOT MSDFGEN_DISABLE_SVG AND NOT TARGET tinyxml2::tinyxml2)
         find_package(tinyxml2 REQUIRED)
@@ -159,7 +160,7 @@ if(NOT MSDFGEN_CORE_ONLY)
     if(MSDFGEN_DISABLE_VARIABLE_FONTS)
         target_compile_definitions(msdfgen-ext PUBLIC MSDFGEN_DISABLE_VARIABLE_FONTS)
     endif()
-    target_link_libraries(msdfgen-ext PRIVATE Freetype::Freetype msdfgen::msdfgen-core)
+    target_link_libraries(msdfgen-ext PRIVATE freetype msdfgen::msdfgen-core)
     target_include_directories(msdfgen-ext
         PUBLIC
             $<INSTALL_INTERFACE:include/msdfgen>
